@@ -1,0 +1,528 @@
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ensure full height on mobile devices */
+    transition: background-color 0.3s ease;
+    -webkit-font-smoothing: antialiased; /* Improve font rendering on Safari */
+}
+
+body.night-mode {
+    background-color: #121212;
+    color: #e0e0e0; /* Change font color to light gray for night mode */
+}
+
+body.blue-theme {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+}
+
+body.green-theme {
+    background-color: #e8f5e9;
+    color: #1b5e20;
+}
+
+.todo-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px; /* Increased max width for better layout on larger screens */
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.todo-container.night-mode {
+    background-color: #1e1e1e;
+    color: #e0e0e0; /* Change font color to light gray for night mode */
+}
+
+.todo-container.blue-theme {
+    background-color: #bbdefb;
+    color: #0d47a1;
+}
+
+.todo-container.green-theme {
+    background-color: #c8e6c9;
+    color: #1b5e20;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 2rem; /* Slightly larger font for better readability */
+    font-weight: bold;
+}
+
+h1.night-mode, h2.night-mode, p.night-mode {
+    color: #e0e0e0; /* Ensure headings and paragraphs have light gray text in night mode */
+}
+
+.input-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#todo-input {
+    flex: 1 1 100%;
+    padding: 12px; /* Increased padding for better touch experience */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+#todo-date {
+    flex: 1 1 calc(50% - 10px);
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    display: none; /* Hide the default date input */
+}
+
+#todo-time {
+    flex: 1 1 calc(50% - 10px);
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+#add-btn {
+    flex: 1 1 100%;
+    padding: 12px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#add-btn.night-mode {
+    background-color: #6c757d; /* Gray for night mode */
+}
+
+#add-btn.blue-theme {
+    background-color: #007bff; /* Blue for blue theme */
+}
+
+#add-btn.green-theme {
+    background-color: #28a745; /* Green for green theme */
+}
+
+#add-btn:hover {
+    background-color: #c82333;
+}
+
+.theme-container {
+    margin-bottom: 20px;
+}
+
+#theme-selector {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.search-container {
+    margin-bottom: 20px;
+}
+
+#search-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+#priority-selector {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+#todo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 300px;
+    overflow-y: auto; /* Add scroll if the list exceeds the container height */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    background: #f9f9f9;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.todo-item:last-child {
+    border-bottom: none; /* Remove border for the last item */
+}
+
+.todo-item.completed {
+    text-decoration: line-through;
+    color: #888;
+    background-color: #e0e0e0;
+}
+
+.todo-item.low-priority {
+    border-left: 5px solid #28a745; /* Green for Low priority */
+    background-color: #e8f5e9;
+}
+
+.todo-item.medium-priority {
+    border-left: 5px solid #ffc107; /* Yellow for Medium priority */
+    background-color: #fff8e1;
+}
+
+.todo-item.high-priority {
+    border-left: 5px solid #dc3545; /* Red for High priority */
+    background-color: #f8d7da;
+}
+
+.todo-item .edit-btn {
+    background: #ffc107;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-right: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.todo-item .edit-btn:hover {
+    background: #e0a800;
+}
+
+.todo-item .priority {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #888;
+}
+
+.todo-item.night-mode {
+    background-color: #2c2c2c;
+    color: #e0e0e0; /* Change font color to light gray for night mode */
+}
+
+.todo-item .priority.night-mode {
+    color: #bbbbbb; /* Slightly dimmed color for priority text in night mode */
+}
+
+#todo-input.night-mode,
+#todo-date.night-mode,
+#todo-time.night-mode,
+#priority-selector.night-mode,
+#search-input.night-mode {
+    background-color: #2c2c2c;
+    color: #e0e0e0; /* Change input text color to light gray for night mode */
+    border: 1px solid #444; /* Adjust border color for night mode */
+}
+
+button.night-mode {
+    background-color: #444;
+    color: #e0e0e0; /* Change button text color to light gray for night mode */
+}
+
+button.night-mode:hover {
+    background-color: #555; /* Slightly lighter hover effect for night mode */
+}
+
+.analytics-link.night-mode {
+    background-color: #444;
+    color: #e0e0e0; /* Change link text color to light gray for night mode */
+}
+
+.analytics-link.night-mode:hover {
+    background-color: #555; /* Slightly lighter hover effect for night mode */
+}
+
+.delete-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+    background: #c82333;
+}
+
+.icon {
+    cursor: pointer;
+    font-size: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+}
+
+.icon:hover {
+    background-color: #e9e9e9;
+}
+
+.flatpickr-calendar {
+    z-index: 1000; /* Ensure the calendar and time picker pop-ups are above other elements */
+    font-size: 0.7rem; /* Make the pop-ups smaller */
+    width: auto; /* Adjust width to fit content */
+    max-width: 260px; /* Limit the maximum width */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    border-radius: 8px; /* Rounded corners for a modern look */
+}
+
+.flatpickr-calendar .flatpickr-days {
+    max-width: 260px; /* Ensure the days section fits within the smaller calendar */
+}
+
+.flatpickr-calendar.arrowTop {
+    margin-top: 2px; /* Reduce spacing between the icon and the pop-up */
+}
+
+.flatpickr-set-btn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.flatpickr-set-btn:hover {
+    background-color: #0056b3;
+}
+
+.restore-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.restore-btn:hover {
+    background-color: #218838;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) { /* For tablets and smaller laptops */
+    .todo-container {
+        width: 85%;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .input-container {
+        gap: 8px;
+    }
+
+    #add-btn {
+        font-size: 0.95rem;
+        padding: 10px;
+    }
+
+    .analytics-link {
+        font-size: 0.95rem;
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 768px) { /* For tablets and large mobile devices */
+    .todo-container {
+        width: 90%;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    .input-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #todo-date, #todo-time {
+        flex: 1 1 100%;
+    }
+
+    #add-btn {
+        flex: 1 1 100%;
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    .analytics-link {
+        font-size: 0.9rem;
+        padding: 10px 15px;
+    }
+
+    #todo-list {
+        max-height: 250px; /* Reduce height for smaller screens */
+    }
+}
+
+@media (max-width: 480px) { /* For mobile devices */
+    .todo-container {
+        width: 95%;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    .input-container {
+        gap: 8px;
+    }
+
+    #todo-input {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    #add-btn {
+        font-size: 0.85rem;
+        padding: 8px;
+    }
+
+    .analytics-link {
+        font-size: 0.85rem;
+        padding: 8px 12px;
+    }
+
+    #todo-list {
+        max-height: 200px; /* Further reduce height for smaller screens */
+    }
+
+    .todo-item {
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+
+    .todo-item .edit-btn, .todo-item .delete-btn {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+    }
+}
+
+button, .analytics-link {
+    touch-action: manipulation;
+}
+
+#todo-list {
+    scrollbar-width: thin;
+    scrollbar-color: #ccc #f9f9f9;
+}
+
+#todo-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+#todo-list::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+#todo-list::-webkit-scrollbar-track {
+    background-color: #f9f9f9;
+}
+
+@media (max-width: 768px) {
+    .todo-container {
+        width: 95%;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .input-container {
+        flex-direction: column;
+    }
+
+    #todo-date, #todo-time {
+        flex: 1 1 100%;
+    }
+
+    #add-btn {
+        flex: 1 1 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    .analytics-link {
+        font-size: 0.9rem;
+        padding: 10px 15px;
+    }
+
+    #add-btn {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+}
+
+.analytics-container {
+    margin-top: 20px;
+}
+
+.analytics-link {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.analytics-link:hover {
+    background-color: #0056b3;
+}
