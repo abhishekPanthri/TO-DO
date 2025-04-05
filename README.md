@@ -30,7 +30,8 @@ TO-DO/
 ├── styles.css         # Styling for the 
 ├── script.js          # JavaScript for 
 ├── completed.html     # Completed tasks 
-├── completed.js       # JavaScript for ├── README.md          # Documentation
+├── completed.js       # JavaScript for 
+├── README.md          # Documentation
 ```
 
 
